@@ -12,15 +12,16 @@ public class UDPDateClient {
             DatagramSocket socket = new DatagramSocket();
             InetAddress serveAddress = InetAddress.getByName("127.0.0.1");
             Scanner sc = new Scanner(System.in);
-            while (true) {
+            int request;
+            do {
                 //Gửi dữ liệu qua server
-                
+                System.out.println("-----MENU-----");
                 System.out.println("1. Time");
                 System.out.println("2. Date");
                 System.out.println("3. Date & Time");
                 System.out.println("4. Exit");
                 System.out.print("Nhap lua chon: ");
-                int request = sc.nextInt();
+                request = sc.nextInt();
                 
                 byte[] outputByte = convertIntToByteArray(request);
                 // 4 đối số: mảng byte, length, address, port 
@@ -35,8 +36,8 @@ public class UDPDateClient {
 
                 // 3 đối số: mảng byte, 0, length
                 String inputStr = new String(inputPack.getData(), 0, inputPack.getLength());
-                System.out.println("Ngay gio he thong: " + inputStr);
-            }
+                System.out.println("Ket qua: " + inputStr + "\n");
+            } while (request != 4);
         } catch (IOException ex) {
             System.out.println("Loi Client: " + ex.toString());
         }
